@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "coding-dojo",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["tools/serve.py", "8733"],
+      "port": 8733
+    }
+  ]
+}

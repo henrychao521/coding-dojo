@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U2 條件判斷 — 教學 ｜ 程式練功房</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/svg-effects.css">
+<link rel="stylesheet" href="../../css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔀%3C/text%3E%3C/svg%3E">
+<style>
+  .demo-ctrl { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:10px 0; }
+  .demo-ctrl label { font-weight:700; font-size:14px; min-width:96px; }
+  .demo-ctrl input[type=range] { flex:1; min-width:160px; height:32px; touch-action:none; }
+  .demo-ctrl .val { font-family:var(--mono); font-weight:700; color:var(--primary-dark); min-width:48px; text-align:right; }
+  .verdict { margin-top:12px; padding:16px 18px; border-radius:var(--radius); font-weight:800; font-size:18px; display:flex; align-items:center; gap:10px; transition:all .2s; }
+  .verdict.t { background:var(--bad-bg); color:var(--bad); border:1px solid var(--bad-bd); }
+  .verdict.f { background:var(--ok-bg); color:var(--ok); border:1px solid var(--ok-bd); }
+  .lesson-cta { display:flex; gap:12px; flex-wrap:wrap; margin:30px 0 10px; }
+  .lesson-cta a { min-height:48px; padding:0 26px; border-radius:14px; font-weight:800; font-size:16px; display:inline-flex; align-items:center; gap:8px; }
+  .lesson-cta .go { background:var(--success); color:#fff; box-shadow:0 4px 14px rgba(46,189,102,.3); }
+  .lesson-cta .back { background:var(--bg-soft); color:var(--text-soft); border:1px solid var(--border); }
+</style>
+</head>
+<body class="lesson">
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🔀</span>
+    <div><h1>程式練功房</h1><p class="subtitle">U2・條件判斷</p></div>
+  </div>
+  <nav class="topnav"><a href="../../index.html" style="color:var(--primary-dark);font-weight:600">← 單元地圖</a></nav>
+</header>
+
+<main class="lesson-wrap">
+  <div class="lesson-hero">
+    <div class="uc-id">UNIT 2 ・ Python 軌</div>
+    <h1>🔀 條件判斷</h1>
+    <p>讓程式「看情況做事」：溫度過高就警示、距離太近就停車。靠的就是 <code>if</code> 條件判斷。</p>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-chip">🔀 <code>if / elif / else</code></div>
+    <div class="concept-chip">⚖️ 比較 <code>&gt; &lt; == &gt;= &lt;=</code></div>
+    <div class="concept-chip">🔗 邏輯 <code>and / or / not</code></div>
+    <div class="concept-chip">📏 範圍判斷</div>
+    <div class="concept-chip">🎯 邊界值處理</div>
+  </div>
+
+  <section class="lesson-block">
+    <h2>1. if：條件成立才做</h2>
+    <p>判斷一個條件，成立（<code>True</code>）就執行縮排的那段。注意冒號 <code>:</code> 和縮排：</p>
+    <pre class="demo-code">temp = <span class="num">75</span>
+<span class="kw">if</span> temp &gt; <span class="num">60</span>:
+    print(<span class="str">"過熱警示！"</span>)   <span class="cmt"># 只有 temp 大於 60 才會印</span></pre>
+  </section>
+
+  <section class="lesson-block">
+    <h2>2. if / elif / else：多選一</h2>
+    <p>多個情況時，由上往下檢查，命中一個就結束。馬達轉速分級：</p>
+    <pre class="demo-code"><span class="kw">if</span> rpm &lt; <span class="num">100</span>:
+    level = <span class="str">"低"</span>
+<span class="kw">elif</span> rpm &lt; <span class="num">300</span>:      <span class="cmt"># 100~299</span>
+    level = <span class="str">"中"</span>
+<span class="kw">else</span>:                  <span class="cmt"># 300 以上</span>
+    level = <span class="str">"高"</span></pre>
+    <p>⚠️ <b>邊界很容易錯</b>：<code>rpm &lt; 100</code> 時 100 本身算「中」。寫條件時先想清楚邊界值落在哪一段。</p>
+  </section>
+
+  <section class="lesson-block">
+    <h2>3. 範圍判斷：連續比較</h2>
+    <p>判斷讀值是否落在安全範圍，Python 可以直接連續寫：</p>
+    <pre class="demo-code"><span class="kw">if</span> low &lt;= value &lt;= high:   <span class="cmt"># value 在 low 和 high 之間（含兩端）</span>
+    print(<span class="str">"安全"</span>)</pre>
+
+    <div class="demo-box">
+      <h3>🎛️ 互動示範：溫度過熱判斷</h3>
+      <p style="font-size:14px;color:var(--text-soft)">拖動溫度，看條件 <code>temp &gt; 60</code> 的判斷結果即時改變。</p>
+      <div class="demo-ctrl">
+        <label>溫度 temp</label>
+        <input type="range" id="tR" min="0" max="100" value="45">
+        <span class="val" id="tV">45</span>
+      </div>
+      <pre class="demo-code" style="margin-bottom:0"><span class="kw">if</span> temp &gt; <span class="num">60</span>:  <span class="cmt"># temp = <span id="tEcho">45</span></span></pre>
+      <div class="verdict f" id="verdict">　</div>
+    </div>
+  </section>
+
+  <div class="lesson-cta">
+    <a class="go" href="practice.html">▶ 開始練習（7 題 + 1 挑戰）</a>
+    <a class="back" href="../../index.html">← 回單元地圖</a>
+  </div>
+</main>
+
+<script src="../../js/audio.js"></script>
+<script src="../../js/units.js"></script>
+<script src="../../js/main.js"></script>
+<script>
+  const tR = document.getElementById('tR'), tV = document.getElementById('tV');
+  const tEcho = document.getElementById('tEcho'), verdict = document.getElementById('verdict');
+  function upd() {
+    const t = +tR.value; tV.textContent = t; tEcho.textContent = t;
+    if (t > 60) { verdict.className = 'verdict t'; verdict.textContent = '🔥 True → 印出「過熱警示！」'; }
+    else { verdict.className = 'verdict f'; verdict.textContent = '✅ False → 條件不成立，跳過'; }
+  }
+  ['input', 'change'].forEach(ev => tR.addEventListener(ev, upd));
+  upd();
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U2 練習 — 條件判斷 ｜ 程式練功房</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/svg-effects.css">
+<link rel="stylesheet" href="../../css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔀%3C/text%3E%3C/svg%3E">
+<style>
+  #bootStatus { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  #bootStatus.boot-ready { color: var(--success); }
+  .prac-topline .tl-right { display: flex; align-items: center; gap: 14px; }
+</style>
+</head>
+<body class="practice">
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🔀</span>
+    <div>
+      <h1>U2 條件判斷</h1>
+      <p class="subtitle">練習與闖關</p>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="index.html">📖 回教學頁</a>
+    <a href="../../index.html" style="color:var(--primary-dark);font-weight:600">← 單元地圖</a>
+  </nav>
+</header>
+
+<main class="prac-shell">
+  <div class="prac-topline">
+    <div class="prob-nav" id="probNav"></div>
+    <div class="tl-right">
+      <span id="progLabel" style="font-size:13px;color:var(--text-muted);font-weight:600"></span>
+      <span id="bootStatus">⏳ 載入 Python 環境中…</span>
+    </div>
+  </div>
+
+  <div class="prac-grid">
+    <!-- 左：題目 -->
+    <section class="prob-panel">
+      <span class="pp-tag" id="probTag"></span>
+      <h2 id="probTitle"></h2>
+      <div class="pp-desc" id="probDesc"></div>
+      <div id="probExamples"></div>
+      <div class="hint-zone" id="hintZone"></div>
+    </section>
+
+    <!-- 右：編輯器 + 結果 -->
+    <section class="editor-panel">
+      <div class="editor-head">
+        <span class="eh-title">程式編輯器</span>
+        <span class="eh-lang">Python 3（Pyodide）</span>
+      </div>
+      <div class="cm-host" id="cmHost"></div>
+      <div class="editor-actions">
+        <button class="btn-run" id="btnRun" type="button">▶ 執行並評測</button>
+        <button class="btn-hint" id="btnHint" type="button">💡 看提示</button>
+        <button class="btn-reset" id="btnReset" type="button">↺ 重設</button>
+      </div>
+      <div class="results" id="results" style="display:none"></div>
+    </section>
+  </div>
+</main>
+
+<!-- 函式庫與評測引擎（vendor 本地化，斷網教室可用）-->
+<script src="../../vendor/codemirror/cm6.bundle.js"></script>
+<script src="../../js/units.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/audio.js"></script>
+<script src="../../js/eval/runner-host.js"></script>
+<!-- 題庫 + 本頁設定，需在 practice.js 之前 -->
+<script>window.UNIT_ID = 'U2';</script>
+<script src="problems.js"></script>
+<script src="../../js/eval/practice.js"></script>
+</body>
+</html>

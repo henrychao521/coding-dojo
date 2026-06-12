@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>開發紀錄與發展脈絡 ｜ 程式練功房</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📒%3C/text%3E%3C/svg%3E">
+<style>
+  .dl-wrap { max-width: 880px; margin: 0 auto; padding: 0 28px 90px; }
+  .dl-hero { padding: 48px 0 18px; }
+  .dl-hero h1 { font-size: 36px; font-weight: 900; letter-spacing: -.025em; }
+  .dl-hero h1 .grad { background: linear-gradient(120deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .dl-hero p { font-size: 16px; color: var(--text-soft); margin-top: 10px; }
+  .rule-box { background: linear-gradient(135deg, #FEF9C3, #fff); border: 1px solid #FDE68A; border-left: 4px solid #D97706; border-radius: var(--radius); padding: 18px 22px; margin: 22px 0 30px; }
+  .rule-box h3 { font-size: 16px; font-weight: 800; color: #92400E; margin-bottom: 8px; }
+  .rule-box ol { margin: 6px 0 0 20px; }
+  .rule-box li { font-size: 14px; color: var(--text-soft); margin-bottom: 5px; line-height: 1.6; }
+  .dl-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .dl-stat { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+  .dl-stat .ds-n { font-size: 24px; font-weight: 900; color: var(--primary); font-family: var(--mono); }
+  .dl-stat .ds-l { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+  @media (max-width:640px){ .dl-meta{ grid-template-columns: repeat(2,1fr);} }
+  .verify-panel { background: #F0FDF4; border: 1px solid #BBF7D0; border-left: 4px solid #16A34A; border-radius: var(--radius); padding: 18px 22px; margin-bottom: 30px; }
+  .verify-panel .vp-head { font-weight: 800; color: #15803D; font-size: 15px; }
+  .verify-panel .vp-result { font-size: 13.5px; color: var(--text-soft); margin: 6px 0 12px; }
+  .verify-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+  .verify-grid span { font-size: 12.5px; color: var(--text-soft); background: #fff; border: 1px solid #BBF7D0; border-radius: 7px; padding: 6px 11px; }
+  .timeline-h { font-size: 22px; font-weight: 900; margin: 8px 0 18px; }
+  .log-phase { position: relative; padding-left: 36px; padding-bottom: 8px; }
+  .log-phase::before { content: ''; position: absolute; left: 11px; top: 8px; bottom: -8px; width: 2px; background: var(--border-strong); }
+  .log-phase:last-child::before { display: none; }
+  .log-phase::after { content: ''; position: absolute; left: 4px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--primary); border: 3px solid #fff; box-shadow: 0 0 0 1.5px var(--primary); }
+  .lp-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 22px; box-shadow: var(--shadow-sm); }
+  .lp-tag { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--primary); }
+  .lp-date { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+  .lp-title { font-size: 19px; font-weight: 800; margin: 6px 0 12px; }
+  .lp-sec { margin-top: 12px; }
+  .lp-sec .lp-label { font-size: 12px; font-weight: 800; letter-spacing: .03em; padding: 2px 9px; border-radius: 999px; display: inline-block; margin-bottom: 6px; }
+  .lp-label.v { background: var(--purple-light); color: var(--purple); }
+  .lp-label.c { background: var(--accent-light); color: var(--accent); }
+  .lp-label.o { background: var(--success-light); color: var(--success); }
+  .lp-verbatim { font-size: 14px; color: var(--text-soft); font-style: italic; border-left: 3px solid var(--border-strong); padding-left: 12px; line-height: 1.75; }
+  .lp-sec p { font-size: 14px; color: var(--text-soft); line-height: 1.8; }
+  .lp-sec ul { margin: 4px 0 0 18px; }
+  .lp-sec li { font-size: 13.5px; color: var(--text-soft); line-height: 1.7; }
+</style>
+</head>
+<body class="devlog">
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">📒</span>
+    <div><h1>開發紀錄</h1><p class="subtitle">程式練功房・發展脈絡</p></div>
+  </div>
+  <nav class="topnav"><a href="index.html" style="color:var(--primary-dark);font-weight:600">← 平台首頁</a></nav>
+</header>
+
+<main class="dl-wrap">
+  <div class="dl-hero">
+    <h1>📒 <span class="grad">開發紀錄</span>與發展脈絡</h1>
+    <p>完整保留每個開發段落的需求逐字稿、決策脈絡與執行產出，作為教學平台的可追溯設計文件。</p>
+  </div>
+
+  <div class="rule-box">
+    <h3>📌 紀錄維護規則</h3>
+    <ol>
+      <li>每完成一個開發段落，於本頁新增一筆紀錄，採三段式：<b>需求逐字稿</b>、<b>決策脈絡</b>、<b>執行產出</b>。</li>
+      <li>每次更新本頁，連同程式碼<b>一起 commit</b>，保持紀錄與程式同步。</li>
+      <li>逐字稿盡量保留使用者原話，作為設計決策的依據與回溯。</li>
+    </ol>
+  </div>
+
+  <div class="dl-meta" id="dlMeta"></div>
+
+  <div class="verify-panel">
+    <div class="vp-head">✓ 第一波驗收測試</div>
+    <div class="vp-result" id="vpResult">測試結果將於實測段落更新。</div>
+    <div class="verify-grid" id="vpGrid"></div>
+  </div>
+
+  <h2 class="timeline-h">開發時間軸</h2>
+  <div id="timeline"></div>
+</main>
+
+<script src="js/devlog.js"></script>
+<script src="js/verify-result.js"></script>
+<script>
+  // 統計
+  const meta = document.getElementById('dlMeta');
+  const phases = window.DEVLOG.length;
+  const stats = [
+    { n: phases, l: '開發段落' },
+    { n: '24', l: '可評測題目' },
+    { n: '3', l: '開放單元' },
+    { n: '12MB', l: 'vendor 本地化' },
+  ];
+  meta.innerHTML = stats.map(s => `<div class="dl-stat"><div class="ds-n">${s.n}</div><div class="ds-l">${s.l}</div></div>`).join('');
+
+  // 驗收（實測後填入）
+  const verify = window.VERIFY || null;
+  if (verify) {
+    document.getElementById('vpResult').textContent = verify.summary;
+    document.getElementById('vpGrid').innerHTML = verify.items.map(i => `<span>✓ ${i}</span>`).join('');
+  } else {
+    document.getElementById('vpGrid').innerHTML = '<span>⏳ 待實測段落補上</span>';
+  }
+
+  // 時間軸
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = window.DEVLOG.map(e => `
+    <div class="log-phase">
+      <div class="lp-card">
+        <div><span class="lp-tag">${e.tag}</span><span class="lp-date">${e.date}</span></div>
+        <div class="lp-title">${e.title}</div>
+        <div class="lp-sec"><span class="lp-label v">需求逐字稿</span><div class="lp-verbatim">「${e.verbatim}」</div></div>
+        <div class="lp-sec"><span class="lp-label c">決策脈絡</span><p>${e.context}</p>${e.decisions ? '<ul>' + e.decisions.map(d => `<li>${d}</li>`).join('') + '</ul>' : ''}</div>
+        <div class="lp-sec"><span class="lp-label o">執行產出</span><ul>${e.outputs.map(o => `<li>${o}</li>`).join('')}</ul></div>
+      </div>
+    </div>`).join('');
+</script>
+</body>
+</html>

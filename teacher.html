@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>教師後台 ｜ 程式練功房</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧑‍🏫%3C/text%3E%3C/svg%3E">
+<style>
+  .t-wrap { max-width: 1000px; margin: 0 auto; padding: 24px 24px 80px; }
+  .t-hero h1 { font-size: 30px; font-weight: 900; }
+  .t-hero p { color: var(--text-soft); margin-top: 6px; }
+  .tabs { display: flex; gap: 8px; margin: 22px 0 18px; flex-wrap: wrap; }
+  .tab-btn { min-height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); font-weight: 700; font-size: 14.5px; cursor: pointer; touch-action: manipulation; }
+  .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: popIn .25s; }
+  .panel-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; box-shadow: var(--shadow-sm); margin-bottom: 18px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid var(--border); padding: 11px 10px; text-align: left; font-size: 14px; }
+  th { font-weight: 700; color: var(--text-soft); }
+  .tool-cell { font-weight: 700; }
+  .stars-cell { color: var(--warning); }
+  .badge-done { background: var(--ok-bg); color: var(--ok); font-weight: 800; font-size: 12.5px; padding: 2px 9px; border-radius: 999px; }
+  .bar { display: inline-block; width: 90px; height: 8px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; vertical-align: middle; margin-right: 6px; }
+  .bar-fill { display: block; height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); }
+  .act-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .btn-t { min-height: 44px; padding: 0 18px; border-radius: 12px; font-weight: 800; font-size: 14.5px; border: none; cursor: pointer; touch-action: manipulation; display: inline-flex; align-items: center; gap: 7px; }
+  .btn-t.primary { background: var(--primary); color: #fff; }
+  .btn-t.ghost { background: var(--bg-soft); color: var(--text-soft); border: 1px solid var(--border); }
+  .file-label { min-height: 44px; padding: 0 18px; border-radius: 12px; font-weight: 800; font-size: 14.5px; cursor: pointer; background: var(--accent); color: #fff; display: inline-flex; align-items: center; gap: 7px; }
+  .file-label input { display: none; }
+  .muted { color: var(--text-muted); }
+  #classSummary { display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .sum-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 22px; text-align: center; }
+  .sum-n { font-size: 26px; font-weight: 900; color: var(--primary); font-family: var(--mono); }
+  .sum-l { font-size: 12px; color: var(--text-muted); }
+  .class-scroll { overflow-x: auto; }
+  .class-table th, .class-table td { white-space: nowrap; font-size: 13px; }
+  .class-table .stu { font-weight: 700; position: sticky; left: 0; background: var(--bg-card); }
+  .cell-prog { display: inline-block; width: 54px; height: 6px; background: var(--bg-soft); border-radius: 999px; overflow: hidden; vertical-align: middle; margin-right: 5px; }
+  .cell-fill { display: block; height: 100%; background: var(--success); }
+  .help { background: linear-gradient(135deg,#eff6ff,#fff); border: 1px solid #bfdbfe; border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 13px 16px; font-size: 13.5px; color: #1e3a8a; line-height: 1.7; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🧑‍🏫</span>
+    <div><h1>教師後台</h1><p class="subtitle">程式練功房</p></div>
+  </div>
+  <nav class="topnav"><a href="index.html" style="color:var(--primary-dark);font-weight:600">← 平台首頁</a></nav>
+</header>
+
+<main class="t-wrap">
+  <div class="t-hero">
+    <h1>🧑‍🏫 教師後台</h1>
+    <p>查看本機進度、匯出個人學習紀錄、彙整全班 JSON 並輸出 CSV。所有資料都在瀏覽器本機，不上傳任何伺服器。</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="panelLocal" type="button">📊 本機進度</button>
+    <button class="tab-btn" data-tab="panelClass" type="button">👥 班級彙整</button>
+  </div>
+
+  <!-- 本機進度 -->
+  <section id="panelLocal" class="tab-panel active">
+    <div class="panel-card">
+      <div class="help">這台裝置目前的練習進度（讀取本機 <code>localStorage</code>）。學生在自己的裝置按「匯出我的進度」存成 JSON，交給老師到「班級彙整」上傳。</div>
+      <table>
+        <thead><tr><th>單元</th><th>狀態</th><th>完成題數</th><th>星數</th></tr></thead>
+        <tbody id="localBody"></tbody>
+      </table>
+      <p class="muted" id="localSummary" style="margin-top:12px;font-size:13px"></p>
+      <div class="act-row">
+        <button class="btn-t primary" type="button" onclick="exportMyJSON()">⬇ 匯出我的進度（JSON）</button>
+        <label class="file-label" style="background:var(--bg-soft);color:var(--text-soft);border:1px solid var(--border)">
+          ↺ 還原進度到本機 <input type="file" accept="application/json" onchange="importMyJSON(event)">
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 班級彙整 -->
+  <section id="panelClass" class="tab-panel">
+    <div class="panel-card">
+      <div class="help">一次選取多個學生的 JSON 檔即可彙整。重複同名學生會以最後一次上傳為準。資料僅存在本頁記憶體，重新整理後清空。</div>
+      <div class="act-row" style="margin-top:0">
+        <label class="file-label">📂 上傳學生 JSON（可多選）<input type="file" accept="application/json" multiple onchange="onClassFiles(event)"></label>
+        <button class="btn-t primary" type="button" onclick="exportClassCSV()">⬇ 匯出班級 CSV</button>
+        <button class="btn-t ghost" type="button" onclick="clearClass()">🗑 清空</button>
+      </div>
+      <div id="classSummary" style="margin-top:16px"></div>
+      <div id="classWrap" style="margin-top:6px"></div>
+    </div>
+  </section>
+</main>
+
+<script src="js/units.js"></script>
+<script src="js/main.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/teacher.js"></script>
+</body>
+</html>

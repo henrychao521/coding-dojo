@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U1 輸出與變數 — 教學 ｜ 程式練功房</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/svg-effects.css">
+<link rel="stylesheet" href="../../css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🖨️%3C/text%3E%3C/svg%3E">
+<style>
+  .demo-ctrl { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:10px 0; }
+  .demo-ctrl label { font-weight:700; font-size:14px; min-width:96px; }
+  .demo-ctrl input[type=range] { flex:1; min-width:160px; height:32px; touch-action:none; }
+  .demo-ctrl .val { font-family:var(--mono); font-weight:700; color:var(--primary-dark); min-width:48px; text-align:right; }
+  .demo-out { background:var(--code-bg2); color:#86efac; font-family:var(--mono); font-size:15px; padding:14px 16px; border-radius:var(--radius); margin-top:10px; }
+  .demo-out .prompt { color:#64748b; }
+  .lesson-cta { display:flex; gap:12px; flex-wrap:wrap; margin:30px 0 10px; }
+  .lesson-cta a { min-height:48px; padding:0 26px; border-radius:14px; font-weight:800; font-size:16px; display:inline-flex; align-items:center; gap:8px; }
+  .lesson-cta .go { background:var(--primary); color:#fff; box-shadow:0 4px 14px var(--primary-glow); }
+  .lesson-cta .back { background:var(--bg-soft); color:var(--text-soft); border:1px solid var(--border); }
+</style>
+</head>
+<body class="lesson">
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🖨️</span>
+    <div><h1>程式練功房</h1><p class="subtitle">U1・輸出與變數</p></div>
+  </div>
+  <nav class="topnav"><a href="../../index.html" style="color:var(--primary-dark);font-weight:600">← 單元地圖</a></nav>
+</header>
+
+<main class="lesson-wrap">
+  <div class="lesson-hero">
+    <div class="uc-id">UNIT 1 ・ Python 軌</div>
+    <h1>🖨️ 輸出與變數</h1>
+    <p>程式的第一步：讓電腦「說話」（輸出），以及用「變數」把資料記下來。我們用生科教室常見的數值——馬達轉速、感測器讀值、材料尺寸——來練。</p>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-chip">🖨️ <code>print()</code> 輸出</div>
+    <div class="concept-chip">📦 變數與賦值 <code>=</code></div>
+    <div class="concept-chip">➕ 數值運算</div>
+    <div class="concept-chip">🔗 字串相接</div>
+    <div class="concept-chip">✨ f-string 格式化</div>
+    <div class="concept-chip">🔄 型別轉換 <code>int()</code></div>
+  </div>
+
+  <section class="lesson-block">
+    <h2>1. 用 print 輸出</h2>
+    <p><code>print()</code> 會把括號裡的東西顯示出來。文字（字串）要用引號包起來：</p>
+    <pre class="demo-code"><span class="cmt"># 印出一段文字</span>
+print(<span class="str">"馬達啟動"</span>)   <span class="cmt"># 螢幕顯示：馬達啟動</span></pre>
+    <p>數字不用引號，直接放進去就好：<code>print(120)</code>。</p>
+  </section>
+
+  <section class="lesson-block">
+    <h2>2. 變數：把資料記下來</h2>
+    <p>變數就像貼了標籤的盒子。<code>=</code> 是「把右邊的值存進左邊的變數」：</p>
+    <pre class="demo-code">rpm = <span class="num">120</span>          <span class="cmt"># 把 120 存進變數 rpm</span>
+print(rpm)         <span class="cmt"># 顯示 120（注意：印變數不用引號）</span></pre>
+    <p>變數可以參與運算，例如兩段木料長度相加：<code>total = a + b</code>。</p>
+  </section>
+
+  <section class="lesson-block">
+    <h2>3. f-string：把變數塞進文字裡</h2>
+    <p>想輸出「目前溫度：25°C」這種混合文字和數值的句子，最方便的是 <b>f-string</b>——在引號前加一個 <code>f</code>，要放變數的地方用大括號 <code>{ }</code>：</p>
+    <pre class="demo-code">temp = <span class="num">25</span>
+print(f<span class="str">"目前溫度：{temp}°C"</span>)   <span class="cmt"># 目前溫度：25°C</span></pre>
+
+    <div class="demo-box">
+      <h3>🎛️ 互動示範：拖動看輸出怎麼變</h3>
+      <p style="font-size:14px;color:var(--text-soft)">改變感測器讀值，看 f-string 輸出如何跟著變。這就是你等一下要在練習題做的事。</p>
+      <div class="demo-ctrl">
+        <label>溫度 temp</label>
+        <input type="range" id="tempR" min="0" max="80" value="25">
+        <span class="val" id="tempV">25</span>
+      </div>
+      <div class="demo-ctrl">
+        <label>轉速 rpm</label>
+        <input type="range" id="rpmR" min="0" max="500" value="120" step="10">
+        <span class="val" id="rpmV">120</span>
+      </div>
+      <pre class="demo-out"><span class="prompt">&gt;&gt;&gt; </span>print(f"溫度 {temp}°C，轉速 {rpm} rpm")
+<span id="demoOut"></span></pre>
+    </div>
+  </section>
+
+  <section class="lesson-block">
+    <h2>4. 型別：數字字串 ≠ 數字</h2>
+    <p><code>"24"</code>（有引號）是<b>字串</b>，<code>24</code>（無引號）是<b>數字</b>。字串不能直接做數學運算，要先用 <code>int()</code> 轉成整數：</p>
+    <pre class="demo-code">s = <span class="str">"24"</span>
+print(int(s) + <span class="num">6</span>)   <span class="cmt"># 30（先轉成數字再相加）</span></pre>
+  </section>
+
+  <div class="lesson-cta">
+    <a class="go" href="practice.html">▶ 開始練習（7 題 + 1 挑戰）</a>
+    <a class="back" href="../../index.html">← 回單元地圖</a>
+  </div>
+</main>
+
+<script src="../../js/audio.js"></script>
+<script src="../../js/units.js"></script>
+<script src="../../js/main.js"></script>
+<script>
+  // 純 JS 互動示範：模擬 f-string 輸出（與 Python 行為一致）
+  const tempR = document.getElementById('tempR'), rpmR = document.getElementById('rpmR');
+  const tempV = document.getElementById('tempV'), rpmV = document.getElementById('rpmV');
+  const out = document.getElementById('demoOut');
+  function upd() {
+    tempV.textContent = tempR.value; rpmV.textContent = rpmR.value;
+    out.textContent = `溫度 ${tempR.value}°C，轉速 ${rpmR.value} rpm`;
+  }
+  // Pointer Events 友善：range input 原生支援觸控
+  ['input', 'change'].forEach(ev => { tempR.addEventListener(ev, upd); rpmR.addEventListener(ev, upd); });
+  upd();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>程式練功房 ｜ 生活科技教學平台</title>
+<meta name="description" content="瀏覽器內寫程式、立即執行、自動評測過關。生活科技情境的 Python 練習平台。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/svg-effects.css">
+<link rel="stylesheet" href="css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🥋%3C/text%3E%3C/svg%3E">
+</head>
+<body class="home">
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🥋</span>
+    <div><h1>程式練功房</h1><p class="subtitle">生活科技・寫程式練習平台</p></div>
+  </div>
+  <nav class="topnav">
+    <a href="#units">單元地圖</a>
+    <a href="teacher.html">教師後台</a>
+    <a href="dev-log.html">開發紀錄</a>
+  </nav>
+</header>
+
+<main>
+  <section class="dojo-hero">
+    <span class="badge">純前端・零安裝・斷網教室可用</span>
+    <h2>在瀏覽器裡<span class="grad">寫程式、馬上跑、自動過關</span></h2>
+    <p class="lead">用馬達轉速、感測器讀值、材料計算這些生科教室的真實情境學 Python。寫完按一下，多組測資自動評測，過關拿星星。第一波開放 Python 軌前三單元。</p>
+  </section>
+
+  <div id="dashboard"></div>
+
+  <section id="units" class="unit-map" aria-label="單元地圖"></section>
+</main>
+
+<script src="js/units.js"></script>
+<script>
+  // 依 DOJO_UNITS 動態產生單元卡（單一真實來源），main.js 之後再補上進度狀態
+  (function () {
+    const map = document.getElementById('units');
+    window.DOJO_UNITS.forEach(u => {
+      const total = u.exCount + (u.challenge ? 1 : 0);
+      const el = document.createElement(u.locked ? 'div' : 'a');
+      el.className = 'unit-card' + (u.locked ? ' locked' : '');
+      el.setAttribute('data-unit', u.id);
+      if (!u.locked) el.href = 'units/' + u.slug + '/index.html';
+      el.innerHTML = `
+        <div class="uc-top">
+          <div class="uc-emoji" style="background:${hexToSoft(u.color)}">${u.emoji}</div>
+          <div>
+            <div class="uc-id">${u.id} ・ ${u.track === 'python' ? 'Python' : u.track}</div>
+            <div class="uc-title">${u.title}</div>
+          </div>
+        </div>
+        <div class="uc-blurb">${u.blurb}</div>
+        ${u.locked ? '' : `
+        <div>
+          <div class="unit-progress"><div class="unit-progress-fill"></div></div>
+          <div class="unit-progress-text">0/${total} 題・★0</div>
+        </div>
+        <div class="uc-foot">
+          <span class="unit-stars">☆☆☆</span>
+          <span style="font-size:13px;color:var(--primary-dark);font-weight:700">開始練 →</span>
+        </div>`}
+      `;
+      map.appendChild(el);
+    });
+    function hexToSoft(hex) {
+      const n = parseInt(hex.slice(1), 16);
+      const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+      return `rgba(${r},${g},${b},.14)`;
+    }
+  })();
+</script>
+<script src="js/main.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/sw-register.js"></script>
+</body>
+</html>

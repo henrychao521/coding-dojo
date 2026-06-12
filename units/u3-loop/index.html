@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U3 迴圈 — 教學 ｜ 程式練功房</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/svg-effects.css">
+<link rel="stylesheet" href="../../css/dojo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔁%3C/text%3E%3C/svg%3E">
+<style>
+  .loop-stage { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:12px 0; }
+  .loop-stage button { min-height:44px; padding:0 18px; border-radius:12px; font-weight:800; font-size:15px; border:none; cursor:pointer; touch-action:manipulation; }
+  .loop-stage .step { background:var(--accent); color:#fff; }
+  .loop-stage .rst { background:var(--bg-soft); color:var(--text-soft); border:1px solid var(--border); }
+  .loop-vars { font-family:var(--mono); font-size:15px; display:flex; gap:22px; flex-wrap:wrap; }
+  .loop-vars b { color:var(--primary-dark); }
+  .belt { display:flex; gap:6px; margin-top:12px; min-height:30px; align-items:center; flex-wrap:wrap; }
+  .belt .led { width:24px; height:24px; border-radius:50%; background:var(--warning); box-shadow:0 0 8px rgba(245,180,0,.6); animation:popIn .3s; }
+  .lesson-cta { display:flex; gap:12px; flex-wrap:wrap; margin:30px 0 10px; }
+  .lesson-cta a { min-height:48px; padding:0 26px; border-radius:14px; font-weight:800; font-size:16px; display:inline-flex; align-items:center; gap:8px; }
+  .lesson-cta .go { background:var(--accent); color:#fff; box-shadow:0 4px 14px rgba(44,95,191,.3); }
+  .lesson-cta .back { background:var(--bg-soft); color:var(--text-soft); border:1px solid var(--border); }
+  .warn-box { background:var(--timeout-bg); border:1px solid var(--timeout-bd); border-left:4px solid var(--timeout); border-radius:var(--radius); padding:14px 18px; margin:16px 0; font-size:14.5px; color:#92400e; line-height:1.7; }
+</style>
+</head>
+<body class="lesson">
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🔁</span>
+    <div><h1>程式練功房</h1><p class="subtitle">U3・迴圈</p></div>
+  </div>
+  <nav class="topnav"><a href="../../index.html" style="color:var(--primary-dark);font-weight:600">← 單元地圖</a></nav>
+</header>
+
+<main class="lesson-wrap">
+  <div class="lesson-hero">
+    <div class="uc-id">UNIT 3 ・ Python 軌</div>
+    <h1>🔁 迴圈</h1>
+    <p>同一件事重複做很多次——累加感測器讀值、數零件、產生燈號圖樣——靠的就是迴圈。也要學會避免最常見的陷阱：無窮迴圈。</p>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-chip">🔁 <code>for</code> + <code>range</code></div>
+    <div class="concept-chip">🔄 <code>while</code> 迴圈</div>
+    <div class="concept-chip">➕ 累加器 <code>total += x</code></div>
+    <div class="concept-chip">🔍 計數 / 找極值</div>
+    <div class="concept-chip">🪜 巢狀迴圈</div>
+    <div class="concept-chip">⚠️ 避免無窮迴圈</div>
+  </div>
+
+  <section class="lesson-block">
+    <h2>1. for 迴圈：跑固定次數</h2>
+    <p><code>range(1, n+1)</code> 會產生 1、2、…、n。配合累加器把它們加起來：</p>
+    <pre class="demo-code">total = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, <span class="num">6</span>):   <span class="cmt"># i = 1,2,3,4,5</span>
+    total += i          <span class="cmt"># 每圈把 i 加進 total</span>
+print(total)            <span class="cmt"># 15</span></pre>
+
+    <div class="demo-box">
+      <h3>🎛️ 互動示範：一步步看累加器</h3>
+      <p style="font-size:14px;color:var(--text-soft)">按「下一步」走一圈迴圈，看 <code>i</code> 和 <code>total</code> 怎麼變。</p>
+      <div class="loop-vars"><span>i = <b id="vi">－</b></span><span>total = <b id="vt">0</b></span></div>
+      <div class="loop-stage">
+        <button class="step" id="stepBtn" type="button">下一步 ▶</button>
+        <button class="rst" id="rstBtn" type="button">↺ 重來</button>
+        <span id="loopMsg" style="font-size:13px;color:var(--text-muted)"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-block">
+    <h2>2. while 迴圈：條件成立就一直做</h2>
+    <p>不知道要跑幾次、只知道「結束條件」時用 <code>while</code>。馬達每秒加速 10 rpm 直到達標：</p>
+    <pre class="demo-code">speed = <span class="num">0</span>
+seconds = <span class="num">0</span>
+<span class="kw">while</span> speed &lt; <span class="num">100</span>:   <span class="cmt"># 還沒到 100 就繼續</span>
+    speed += <span class="num">10</span>
+    seconds += <span class="num">1</span>
+print(seconds)         <span class="cmt"># 10 秒</span></pre>
+
+    <div class="warn-box">
+      ⚠️ <b>無窮迴圈陷阱：</b><code>while</code> 裡如果變數沒有往「結束條件」靠近，迴圈就永遠停不下來。例如忘了寫 <code>speed += 10</code>，<code>speed</code> 永遠是 0、永遠 &lt; 100。在本平台若不小心寫成無窮迴圈，評測會在數秒後自動中止並提醒你。
+    </div>
+  </section>
+
+  <section class="lesson-block">
+    <h2>3. 巢狀迴圈：迴圈裡的迴圈</h2>
+    <p>產生階梯狀的輸送帶燈號：第 i 列點亮 i 顆燈。外層跑列、每列點對應數量的燈：</p>
+    <pre class="demo-code"><span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, n+<span class="num">1</span>):
+    print(<span class="str">"●"</span> * i)   <span class="cmt"># 第 i 列 i 顆 ●</span></pre>
+    <div class="demo-box">
+      <h3>🎛️ 互動示範：階梯燈號</h3>
+      <div class="loop-stage">
+        <button class="step" id="beltBtn" type="button">點亮下一列 ▶</button>
+        <button class="rst" id="beltRst" type="button">↺ 重來</button>
+      </div>
+      <div id="beltArea"></div>
+    </div>
+  </section>
+
+  <div class="lesson-cta">
+    <a class="go" href="practice.html">▶ 開始練習（7 題 + 1 挑戰）</a>
+    <a class="back" href="../../index.html">← 回單元地圖</a>
+  </div>
+</main>
+
+<script src="../../js/audio.js"></script>
+<script src="../../js/units.js"></script>
+<script src="../../js/main.js"></script>
+<script>
+  // 累加器逐步示範
+  let i = 0, total = 0;
+  const vi = document.getElementById('vi'), vt = document.getElementById('vt'), msg = document.getElementById('loopMsg');
+  document.getElementById('stepBtn').addEventListener('pointerup', () => {
+    if (i >= 5) { msg.textContent = '迴圈結束（i 已經跑完 1~5）。total = ' + total; return; }
+    i++; total += i; vi.textContent = i; vt.textContent = total;
+    msg.textContent = `第 ${i} 圈：total += ${i} → ${total}`;
+    if (window.SoundFX) SoundFX.pop();
+  });
+  document.getElementById('rstBtn').addEventListener('pointerup', () => {
+    i = 0; total = 0; vi.textContent = '－'; vt.textContent = '0'; msg.textContent = '';
+  });
+
+  // 階梯燈號示範
+  let row = 0;
+  const beltArea = document.getElementById('beltArea');
+  function drawBelt() {
+    beltArea.innerHTML = '';
+    for (let r = 1; r <= row; r++) {
+      const line = document.createElement('div'); line.className = 'belt';
+      for (let c = 0; c < r; c++) { const d = document.createElement('span'); d.className = 'led'; line.appendChild(d); }
+      beltArea.appendChild(line);
+    }
+  }
+  document.getElementById('beltBtn').addEventListener('pointerup', () => {
+    if (row < 6) { row++; drawBelt(); if (window.SoundFX) SoundFX.pop(); }
+  });
+  document.getElementById('beltRst').addEventListener('pointerup', () => { row = 0; drawBelt(); });
+</script>
+</body>
+</html>
