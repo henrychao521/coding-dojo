@@ -67,7 +67,7 @@ window.PROBLEMS = {
       cases: [
         { args: [1], expected: '●' },
         { args: [2], expected: '●\n●●' },
-        { args: [3], expected: '●\n●●●' },
+        { args: [3], expected: '●\n●●\n●●●' },
       ],
       hints: ['外層 <code>for i in range(1, n + 1):</code>，每列字串是 <code>"●" * i</code>。', '把每列收進清單，最後 <code>"\\n".join(rows)</code> 接起來。'],
     },

@@ -4,7 +4,9 @@
  *   - 其餘同源資源（js/css/wasm/vendor）：cache-first（第一次抓到就快取，之後離線也能用）
  * 這讓「完整 vendor」再加一層快取：單元間切換、重整、斷網都不必重抓 12MB Pyodide。
  */
-const CACHE = 'coding-dojo-v1';
+// 非 HTML 同源資源走 cache-first，所以題目與評測程式改版後必須換快取名，
+// 否則已開過站的學生會一直吃到舊題目（activate 會自動清掉舊快取）。
+const CACHE = 'coding-dojo-v2';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
