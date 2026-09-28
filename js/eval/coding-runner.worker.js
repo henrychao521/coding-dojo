@@ -47,8 +47,10 @@ def __b64d(s):
     return base64.b64decode(s).decode('utf-8')
 
 def _eq(a, b):
+    # bool 是 int 的子類別（1 == True），要先擋：期望布林就必須回傳布林，
+    # 否則 return 1 / return 0 也會被當成 True / False 過關
     if isinstance(a, bool) or isinstance(b, bool):
-        return a == b
+        return isinstance(a, bool) and isinstance(b, bool) and a == b
     if isinstance(a, (int, float)) and isinstance(b, (int, float)):
         return math.isclose(float(a), float(b), rel_tol=1e-6, abs_tol=1e-9)
     return a == b

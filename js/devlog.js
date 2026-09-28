@@ -43,4 +43,11 @@ window.DEVLOG = [
     decisions: ['確認 GitHub Pages 無 COOP/COEP 下 terminate 逾時方案可行', '保留實測數據於 verify-result.js 供開發紀錄頁顯示'],
     outputs: ['8 組評測斷言全綠、逾時 3 秒攔截、重啟後續測 5/5', 'UI 串接拿 3★並寫入 localStorage、全頁 console 零錯誤', 'iPad 44px 觸控達標、SW 啟用；驗收通過'],
   },
+  {
+    tag: '段落 6', date: '2026-09-28', title: '評測修正：布林題不再接受 1／0',
+    verbatim: '（2026-09-28 跨平台審查：U2 布林題的 _eq 讓 return 1 也被判成 True 過關）',
+    context: 'Python 的 bool 是 int 的子類別，1 == True 成立。舊版 _eq 只要任一邊是 bool 就直接用 ==，學生在 is_overheat 等題寫 return 1／return 0 也會拿到星星，沒有真正檢查「回傳布林值」這個 U2 核心觀念。',
+    decisions: ['任一邊是 bool 時，兩邊都必須是 bool 才比較', 'Service Worker 快取名 v2 → v3，讓已開過站的學生拿到新評測程式'],
+    outputs: ['js/eval/coding-runner.worker.js：_eq 布林分支改為型別嚴格比對', '影響 U2 e1 is_overheat、e3 in_safe_range、e4 enough_material、e6 low_voltage_warn；其餘題型不變', 'sw.js：CACHE = coding-dojo-v3'],
+  },
 ];
