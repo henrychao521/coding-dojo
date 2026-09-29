@@ -28,10 +28,13 @@ function recordResult(unitId, probId, { passed, stars = 0, hints = 0, attempts =
   const slot = probId === 'challenge' ? (u.challenge || {}) : (u.ex[probId] || {});
   const prevStars = slot.stars || 0;
   const improved = passed && (!slot.passed || stars > prevStars);
+  // hints 跟著「最佳成績」走：星數進步、或同星數但提示更少才更新，避免出現「3 星卻用了 2 次提示」
+  const keepHints = slot.passed && !(passed && (stars > prevStars ||
+    (stars === prevStars && hints < (slot.hints != null ? slot.hints : Infinity))));
   const next = {
     passed: slot.passed || passed,
     stars: Math.max(prevStars, passed ? stars : 0),
-    hints, attempts: (slot.attempts || 0) + attempts,
+    hints: keepHints ? slot.hints : hints, attempts: (slot.attempts || 0) + attempts,
     updated: new Date().toISOString(),
   };
   if (probId === 'challenge') u.challenge = next; else u.ex[probId] = next;
