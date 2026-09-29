@@ -33,7 +33,7 @@ self.addEventListener('fetch', (e) => {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy));
         return res;
-      }).catch(() => caches.match(req).then(r => r || caches.match('index.html')))
+      }).catch(() => caches.match(req).then(r => r || offlinePage()))
     );
   } else {
     e.respondWith(
@@ -44,3 +44,16 @@ self.addEventListener('fetch', (e) => {
     );
   }
 });
+
+// 斷網且這一頁沒快取過：回一頁獨立的離線說明（連結用絕對網址）。
+// 舊版回退成根目錄的 index.html，但網址還停在子目錄，頁內相對路徑的 css/js 全部抓錯，畫面整個破掉。
+function offlinePage() {
+  const home = self.registration.scope;
+  const html = `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>離線中｜程式練功房</title></head>
+<body style="font-family:system-ui,-apple-system,'Noto Sans TC',sans-serif;max-width:34em;margin:3em auto;padding:0 16px;line-height:1.8;color:#222;background:#fff">
+<h1 style="font-size:1.4em">目前沒有網路，這一頁還沒存到這台裝置</h1>
+<p>請先在有網路的時候打開這一頁一次（練習頁會同時下載 Python 執行環境），之後斷網也能使用。</p>
+<p><a href="${home}">← 回單元地圖</a></p></body></html>`;
+  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
