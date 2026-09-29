@@ -42,7 +42,7 @@
 
   <div class="concept-grid">
     <div class="concept-chip">🖨️ <code>print()</code> 輸出</div>
-    <div class="concept-chip">📦 變數與賦值 <code>=</code></div>
+    <div class="concept-chip">📦 變數與指定 <code>=</code></div>
     <div class="concept-chip">➕ 數值運算</div>
     <div class="concept-chip">🔗 字串相接</div>
     <div class="concept-chip">✨ f-string 格式化</div>
@@ -59,14 +59,22 @@ print(<span class="str">"馬達啟動"</span>)   <span class="cmt"># 螢幕顯�
 
   <section class="lesson-block">
     <h2>2. 變數：把資料記下來</h2>
-    <p>變數就像貼了標籤的盒子。<code>=</code> 是「把右邊的值存進左邊的變數」：</p>
+    <p>變數就像貼了標籤的盒子。<code>=</code> 叫做「指定」，意思是把右邊的值存進左邊的變數：</p>
     <pre class="demo-code">rpm = <span class="num">120</span>          <span class="cmt"># 把 120 存進變數 rpm</span>
 print(rpm)         <span class="cmt"># 顯示 120（注意：印變數不用引號）</span></pre>
     <p>變數可以參與運算，例如兩段木料長度相加：<code>total = a + b</code>。</p>
   </section>
 
   <section class="lesson-block">
-    <h2>3. f-string：把變數塞進文字裡</h2>
+    <h2>3. 字串相接：用 + 把文字接起來</h2>
+    <p>兩段文字（字串）可以用 <code>+</code> 接成一段，常用來在數值或名稱前面加上說明：</p>
+    <pre class="demo-code">material = <span class="str">"木板"</span>
+print(<span class="str">"材料："</span> + material)   <span class="cmt"># 材料：木板</span></pre>
+    <p>⚠️ <code>+</code> 兩邊都必須是字串。要接數字時得先用 <code>str()</code> 轉成字串，例如 <code>"轉速：" + str(rpm)</code>；更方便的做法是下一節的 f-string。</p>
+  </section>
+
+  <section class="lesson-block">
+    <h2>4. f-string：把變數塞進文字裡</h2>
     <p>想輸出「目前溫度：25°C」這種混合文字和數值的句子，最方便的是 <b>f-string</b>——在引號前加一個 <code>f</code>，要放變數的地方用大括號 <code>{ }</code>：</p>
     <pre class="demo-code">temp = <span class="num">25</span>
 print(f<span class="str">"目前溫度：{temp}°C"</span>)   <span class="cmt"># 目前溫度：25°C</span></pre>
@@ -90,7 +98,7 @@ print(f<span class="str">"目前溫度：{temp}°C"</span>)   <span class="cmt">
   </section>
 
   <section class="lesson-block">
-    <h2>4. 型別：數字字串 ≠ 數字</h2>
+    <h2>5. 型別：數字字串 ≠ 數字</h2>
     <p><code>"24"</code>（有引號）是<b>字串</b>，<code>24</code>（無引號）是<b>數字</b>。字串不能直接做數學運算，要先用 <code>int()</code> 轉成整數：</p>
     <pre class="demo-code">s = <span class="str">"24"</span>
 print(int(s) + <span class="num">6</span>)   <span class="cmt"># 30（先轉成數字再相加）</span></pre>

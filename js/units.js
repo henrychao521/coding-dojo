@@ -7,7 +7,7 @@ window.DOJO_UNITS = [
     title: '輸出與變數', emoji: '🖨️', color: '#FF7A00',
     exCount: 7, challenge: true, locked: false,
     blurb: 'print 輸出、變數、數值與字串運算、f-string 格式化。',
-    concepts: ['print() 輸出', '變數命名與賦值', '數值運算', '字串相接', 'f-string 格式化', '型別轉換 int()/str()'],
+    concepts: ['print() 輸出', '變數命名與指定', '數值運算', '字串相接', 'f-string 格式化', '型別轉換 int()/str()'],
   },
   {
     id: 'U2', slug: 'u2-condition', track: 'python',

@@ -14,7 +14,7 @@ window.PROBLEMS = {
     },
     {
       id: 'e2', title: '印出馬達轉速', mode: 'stdout',
-      desc: '變數 <code>rpm</code> 已經幫你準備好（代表馬達每分鐘的轉速）。請把 <code>rpm</code> 的值印出來。',
+      desc: '變數 <code>rpm</code> 已經幫你準備好（代表馬達每分鐘的轉速），系統會用好幾組不同的轉速測你的程式。請把 <code>rpm</code> 的值印出來。<br>⚠️ 不要自己再寫 <code>rpm = 120</code>，那樣每一組測資都會被你蓋成同一個數字。',
       starter: '# rpm 已經存在，直接把它印出來\n',
       examples: [{ in: 'rpm = 120', out: '120' }, { in: 'rpm = 240', out: '240' }],
       cases: [
@@ -38,7 +38,7 @@ window.PROBLEMS = {
     },
     {
       id: 'e4', title: '齒輪減速比', mode: 'stdout',
-      desc: '變數 <code>big</code>（大齒輪齒數）、<code>small</code>（小齒輪齒數）。減速比 = 大齒數 ÷ 小齒數。請算出減速比並印出。',
+      desc: '馬達軸上的小齒輪（主動輪，齒數 <code>small</code>）帶動大齒輪（從動輪，齒數 <code>big</code>），轉速會變慢、力量變大。減速比 = 從動輪齒數 ÷ 主動輪齒數 = <code>big</code> ÷ <code>small</code>。請算出減速比並印出（用 <code>/</code> 除，結果會是 <code>4.0</code> 這種小數形式）。',
       starter: '# 減速比 = big 除以 small\n',
       examples: [{ in: 'big=48, small=12', out: '4.0' }, { in: 'big=50, small=10', out: '5.0' }],
       cases: [
