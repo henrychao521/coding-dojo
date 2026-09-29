@@ -55,10 +55,19 @@ def _eq(a, b):
         return math.isclose(float(a), float(b), rel_tol=1e-6, abs_tol=1e-9)
     return a == b
 
+class _CappedIO(io.StringIO):
+    # 迴圈裡有 print 的無窮迴圈，在 3 秒逾時前就可能把輸出灌到數十 MB，低階平板的分頁會直接當掉；
+    # 超過上限就丟例外提前結束
+    LIMIT = 100000
+    def write(self, s):
+        if self.tell() + len(s) > self.LIMIT:
+            raise RuntimeError("輸出超過 10 萬字，程式可能卡在會一直 print 的迴圈裡")
+        return super().write(s)
+
 def _run_stdout(user_code, setup_code):
     ns = {}
     old = sys.stdout
-    buf = io.StringIO()
+    buf = _CappedIO()
     sys.stdout = buf
     try:
         if setup_code:
@@ -70,10 +79,15 @@ def _run_stdout(user_code, setup_code):
 
 def _call_func(user_code, func_name, args):
     ns = {}
-    exec(user_code, ns)
-    if func_name not in ns or not callable(ns[func_name]):
-        raise NameError("找不到函式 " + func_name + "（請確認函式名稱拼寫正確）")
-    return ns[func_name](*args)
+    old = sys.stdout
+    sys.stdout = _CappedIO()      # 函式模式不比對輸出，但一樣要擋住無窮 print
+    try:
+        exec(user_code, ns)
+        if func_name not in ns or not callable(ns[func_name]):
+            raise NameError("找不到函式 " + func_name + "（請確認函式名稱拼寫正確）")
+        return ns[func_name](*args)
+    finally:
+        sys.stdout = old
 
 def _run_func_case(user_code, func_name, args, expected):
     r = _call_func(user_code, func_name, args)
