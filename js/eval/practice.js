@@ -15,8 +15,8 @@
   // 星級規則：全部測資通過後，依提示使用次數給星（0→3、1→2、≥2→1）
   function starsFor(hints) { return hints <= 0 ? 3 : hints === 1 ? 2 : 1; }
 
-  // 每題的暫存狀態（本次 session）
-  const state = problems.map(() => ({ hints: 0, attempts: 0 }));
+  // 每題的暫存狀態（本次 session）；code = 切換題目前編輯器裡的內容，切回來時還原
+  const state = problems.map(() => ({ hints: 0, attempts: 0, code: null }));
   let cur = 0;
   let editor = null;
   const editorCompartments = {};
@@ -66,7 +66,7 @@
       pill.setAttribute('aria-current', i === cur ? 'true' : 'false');
       const rec = prob.isChallenge ? u.challenge : (u.ex && u.ex['e' + (i + 1)]);
       if (rec && rec.passed) pill.classList.add('passed');
-      pill.addEventListener('pointerup', () => { if (i !== cur) { cur = i; renderProblem(); } });
+      pill.addEventListener('pointerup', () => { if (i !== cur) { goTo(i); } });
       navEl.appendChild(pill);
     });
   }
@@ -79,6 +79,13 @@
   const hintZone = document.getElementById('hintZone');
   const resultsEl = document.getElementById('results');
   const progLabel = document.getElementById('progLabel');
+
+  // 切題前先把目前寫的程式存起來，否則 renderProblem 會用 starter 蓋掉
+  function goTo(i) {
+    state[cur].code = getCode();
+    cur = i;
+    renderProblem();
+  }
 
   function renderProblem() {
     const prob = problems[cur];
@@ -93,8 +100,8 @@
       h += '</tbody></table></div>';
       examplesEl.innerHTML = h;
     } else examplesEl.innerHTML = '';
-    // 編輯器內容
-    setEditorDoc(prob.starter || '');
+    // 編輯器內容：這一題寫過就還原，沒寫過才放 starter
+    setEditorDoc(state[cur].code != null ? state[cur].code : (prob.starter || ''));
     // 提示區（已揭露的提示）
     renderHints();
     // 清空結果
@@ -250,7 +257,7 @@
     const close = () => modal.classList.remove('show');
     modal.querySelector('.sc-stay').addEventListener('pointerup', close);
     const next = modal.querySelector('button.sc-next');
-    if (next) next.addEventListener('pointerup', () => { close(); if (cur < problems.length - 1) { cur++; renderProblem(); } });
+    if (next) next.addEventListener('pointerup', () => { close(); if (cur < problems.length - 1) goTo(cur + 1); });
     modal.addEventListener('pointerup', (e) => { if (e.target === modal) close(); });
   }
 
