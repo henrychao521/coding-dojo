@@ -50,4 +50,11 @@ window.DEVLOG = [
     decisions: ['任一邊是 bool 時，兩邊都必須是 bool 才比較', 'Service Worker 快取名 v2 → v3，讓已開過站的學生拿到新評測程式'],
     outputs: ['js/eval/coding-runner.worker.js：_eq 布林分支改為型別嚴格比對', '影響 U2 e1 is_overheat、e3 in_safe_range、e4 enough_material、e6 low_voltage_warn；其餘題型不變', 'sw.js：CACHE = coding-dojo-v3'],
   },
+  {
+    tag: '段落 7', date: '2026-09-29', title: '第二輪審查（異家族模型）修正',
+    verbatim: '（2026-09-29 第二輪審查：另一家族模型對 9/28 前原始碼的 15 條發現，逐條查證後修正）',
+    context: '逐條實測：切換題目會用 starter 蓋掉學生程式；斷網時子目錄頁回退成根目錄 index.html，相對路徑全錯；無窮 print 在 3 秒逾時前可灌爆記憶體；提示次數被最新一次覆寫；U1 教學頁缺字串相接、U2/U3 用函式作答卻沒說明 def／return、U3「巢狀迴圈」其實只有一層。CSV 匯出沒有 BOM 一條查證為誤判（原始碼第一版就有 U+FEFF）。',
+    decisions: ['切題保留每題程式碼（本次作答期間）', '斷網回退改為獨立離線頁', 'stdout 上限 10 萬字', '函式作答方式在 U2 教學頁先講三件事，不提前整個 U4', 'Pyodide 預先快取與單元結業定義列為待決定，未動'],
+    outputs: ['js/eval/practice.js、sw.js、js/eval/coding-runner.worker.js、js/main.js', 'units/u1-output（字串相接小節、指定、e2／e4 敘述）、u2-condition（作答方式）、u3-loop（巢狀迴圈、e6 starter）', 'sw.js：CACHE = coding-dojo-v4'],
+  },
 ];

@@ -6,7 +6,7 @@
  */
 // 非 HTML 同源資源走 cache-first，所以題目與評測程式改版後必須換快取名，
 // 否則已開過站的學生會一直吃到舊題目（activate 會自動清掉舊快取）。
-const CACHE = 'coding-dojo-v3';
+const CACHE = 'coding-dojo-v4';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
