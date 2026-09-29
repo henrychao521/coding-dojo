@@ -88,6 +88,18 @@
     </div>
   </section>
 
+  <section class="lesson-block">
+    <h2>4. 練習題的作答方式：完成函式</h2>
+    <p>從這個單元開始，練習題會先給你一個<b>函式</b>的外殼，你只要把裡面補完。函式會在 U4 詳細教，現在先認得三件事就能作答：</p>
+    <pre class="demo-code"><span class="kw">def</span> is_overheat(t):     <span class="cmt"># 第一行已經寫好：函式名稱與輸入值 t</span>
+    <span class="kw">if</span> t &gt; <span class="num">60</span>:            <span class="cmt"># 你寫的程式要往內縮排 4 格</span>
+        <span class="kw">return</span> <span class="kw">True</span>       <span class="cmt"># return：把答案交回去，函式就結束</span>
+    <span class="kw">return</span> <span class="kw">False</span></pre>
+    <p>① <b>輸入值</b>：括號裡的 <code>t</code> 會由系統自動帶入好幾組不同的數字，不要自己再寫 <code>t = 80</code>。<br>
+       ② <b>return 不是 print</b>：題目要你「回傳」就用 <code>return</code>；用 <code>print</code> 只會印在畫面上，系統收不到你的答案。<br>
+       ③ 外殼裡的 <code>pass</code> 是「這裡先空著」的意思，寫好之後刪掉就可以。</p>
+  </section>
+
   <div class="lesson-cta">
     <a class="go" href="practice.html">▶ 開始練習（7 題 + 1 挑戰）</a>
     <a class="back" href="../../index.html">← 回單元地圖</a>

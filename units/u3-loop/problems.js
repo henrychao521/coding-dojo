@@ -62,14 +62,14 @@ window.PROBLEMS = {
     {
       id: 'e6', title: '輸送帶燈號（巢狀）', mode: 'func', funcName: 'belt_pattern',
       desc: '完成 <code>belt_pattern(n)</code>：回傳階梯燈號字串，第 1 列 1 顆 <code>●</code>、第 2 列 2 顆…第 n 列 n 顆，列與列之間用換行 <code>\\n</code> 隔開。例如 n=3 回傳 <code>"●\\n●●\\n●●●"</code>。',
-      starter: 'def belt_pattern(n):\n    rows = []\n    # 第 i 列有 i 顆 ●\n    return "\\n".join(rows)\n',
+      starter: 'def belt_pattern(n):\n    result = ""\n    for i in range(1, n + 1):\n        line = ""\n        # 內層迴圈：把 i 顆 ● 接到 line\n        # 第 2 列起，先接一個換行 "\\n"，再把 line 接到 result\n        pass\n    return result\n',
       examples: [{ in: 'n = 1', out: '●' }, { in: 'n = 3', out: '●（換行）●●（換行）●●●' }],
       cases: [
         { args: [1], expected: '●' },
         { args: [2], expected: '●\n●●' },
         { args: [3], expected: '●\n●●\n●●●' },
       ],
-      hints: ['外層 <code>for i in range(1, n + 1):</code>，每列字串是 <code>"●" * i</code>。', '把每列收進清單，最後 <code>"\\n".join(rows)</code> 接起來。'],
+      hints: ['內層 <code>for j in range(i):</code> 每圈 <code>line += "●"</code>，就組出第 i 列。', '接到 result 前先判斷：<code>if i &gt; 1:</code> 就 <code>result += "\\n"</code>，再 <code>result += line</code>。'],
     },
     {
       id: 'e7', title: '平均讀值', mode: 'func', funcName: 'average',

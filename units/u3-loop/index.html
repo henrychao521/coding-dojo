@@ -89,9 +89,13 @@ print(seconds)         <span class="cmt"># 10 秒</span></pre>
 
   <section class="lesson-block">
     <h2>3. 巢狀迴圈：迴圈裡的迴圈</h2>
-    <p>產生階梯狀的輸送帶燈號：第 i 列點亮 i 顆燈。外層跑列、每列點對應數量的燈：</p>
-    <pre class="demo-code"><span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, n+<span class="num">1</span>):
-    print(<span class="str">"●"</span> * i)   <span class="cmt"># 第 i 列 i 顆 ●</span></pre>
+    <p>產生階梯狀的輸送帶燈號：第 i 列點亮 i 顆燈。<b>外層迴圈跑「列」，內層迴圈在這一列裡一顆一顆放燈</b>：</p>
+    <pre class="demo-code"><span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, n+<span class="num">1</span>):     <span class="cmt"># 外層：第 i 列</span>
+    line = <span class="str">""</span>
+    <span class="kw">for</span> j <span class="kw">in</span> range(i):          <span class="cmt"># 內層：這一列放 i 顆燈</span>
+        line += <span class="str">"●"</span>
+    print(line)</pre>
+    <p>內層每跑完一整輪，外層才前進一列。（Python 也能用字串乘法 <code>"●" * i</code> 一次做出一列，結果相同；練習時兩種寫法都可以。）</p>
     <div class="demo-box">
       <h3>🎛️ 互動示範：階梯燈號</h3>
       <div class="loop-stage">
