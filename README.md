@@ -5,7 +5,7 @@
 ## 特色
 - **純前端零後端**：Python 用 [Pyodide](https://pyodide.org)（WASM）在瀏覽器執行。
 - **自動評測**：每題多組測資斷言、無窮迴圈逾時保護（Worker `terminate()`）、過關依提示使用次數評 1–3 星。
-- **斷網教室可用**：Pyodide 核心與 CodeMirror 6 全部 vendor 進 repo，再加一層 Service Worker 快取。
+- **開過一次後斷網可用**：Pyodide 核心與 CodeMirror 6 全部 vendor 進 repo，再加一層 Service Worker 快取。快取是「用到才存」，所以每台裝置要先在有網路時開過一次練習頁（約 12 MB）；要整間教室斷網上課，老師可在有網路時於每台學生裝置打開**教師後台 →「📶 離線準備」→「準備離線使用」**，一次預先下載 Python 執行環境與全部單元頁，並顯示進度與完成狀態。
 - **全面觸控**：Pointer Events、按鈕 ≥44px，iPad 可用。
 - **進度本機保存**：`localStorage`（key `coding_progress_v1`），可匯出 JSON、教師後台彙整與 CSV。
 

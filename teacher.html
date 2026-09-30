@@ -45,6 +45,11 @@
   .class-table .stu { font-weight: 700; position: sticky; left: 0; background: var(--bg-card); }
   .cell-prog { display: inline-block; width: 54px; height: 6px; background: var(--bg-soft); border-radius: 999px; overflow: hidden; vertical-align: middle; margin-right: 5px; }
   .cell-fill { display: block; height: 100%; background: var(--success); }
+  .off-bar { height: 10px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; margin-top: 16px; }
+  .off-fill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), var(--success)); transition: width .2s; }
+  .off-status { margin-top: 10px; font-size: 14px; color: var(--text-soft); }
+  .off-status.ok { color: var(--success); font-weight: 700; }
+  .off-status.err { color: var(--danger, #dc2626); font-weight: 700; }
   .help { background: linear-gradient(135deg,#eff6ff,#fff); border: 1px solid #bfdbfe; border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 13px 16px; font-size: 13.5px; color: #1e3a8a; line-height: 1.7; margin-bottom: 14px; }
 </style>
 </head>
@@ -66,6 +71,7 @@
   <div class="tabs">
     <button class="tab-btn active" data-tab="panelLocal" type="button">📊 本機進度</button>
     <button class="tab-btn" data-tab="panelClass" type="button">👥 班級彙整</button>
+    <button class="tab-btn" data-tab="panelOffline" type="button">📶 離線準備</button>
   </div>
 
   <!-- 本機進度 -->
@@ -99,11 +105,28 @@
       <div id="classWrap" style="margin-top:6px"></div>
     </div>
   </section>
+
+  <!-- 離線準備 -->
+  <section id="panelOffline" class="tab-panel">
+    <div class="panel-card">
+      <div class="help">練習頁的 Python 執行環境約 12 MB，平常要<b>開過一次練習頁</b>才會存進裝置。
+        教室要斷網上課時，請在<b>有網路的時候</b>，於<b>每一台學生要用的裝置</b>上打開這一頁按下「準備離線使用」：
+        會一次下載 Python 執行環境與所有單元的教學頁、練習頁，之後這台裝置斷網也能開練習頁、執行程式。
+        快取存在這台裝置的瀏覽器裡，換裝置、換瀏覽器或清除網站資料後要重新準備。</div>
+      <div class="act-row" style="margin-top:0">
+        <button class="btn-t primary" id="btnOffline" type="button">📥 準備離線使用</button>
+      </div>
+      <div class="off-bar" aria-hidden="true"><span class="off-fill" id="offFill"></span></div>
+      <p id="offStatus" class="off-status" role="status" aria-live="polite">檢查中…</p>
+    </div>
+  </section>
 </main>
 
 <script src="js/units.js"></script>
 <script src="js/main.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/teacher.js"></script>
+<script src="js/sw-register.js"></script>
+<script src="js/offline-prep.js"></script>
 </body>
 </html>

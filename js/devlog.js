@@ -57,4 +57,11 @@ window.DEVLOG = [
     decisions: ['切題保留每題程式碼（本次作答期間）', '斷網回退改為獨立離線頁', 'stdout 上限 10 萬字', '函式作答方式在 U2 教學頁先講三件事，不提前整個 U4', 'Pyodide 預先快取與單元結業定義列為待決定，未動'],
     outputs: ['js/eval/practice.js、sw.js、js/eval/coding-runner.worker.js、js/main.js', 'units/u1-output（字串相接小節、指定、e2／e4 敘述）、u2-condition（作答方式）、u3-loop（巢狀迴圈、e6 starter）', 'sw.js：CACHE = coding-dojo-v4'],
   },
+  {
+    tag: '段落 8', date: '2026-09-30', title: '離線使用：改寫說明＋教師後台「準備離線使用」',
+    verbatim: '（2026-09-30 第二輪待決定 R2-13，選 A＋C：README／首頁「斷網可用」改寫成「開過一次後斷網可用」；教師後台加「準備離線使用」按鈕，預先下載 Pyodide 與各單元練習頁並顯示進度與完成）',
+    context: '審查指出首頁與 README 宣稱「斷網教室可用」，但 Service Worker 是「用到才存」：約 12 MB 的 Python 執行環境要開過一次練習頁才會存進裝置，沒開過的單元斷網時只會看到離線說明頁。不採「安裝時就預載」（每位訪客首次多 12 MB），改由老師在需要斷網上課時於每台學生裝置按一次。',
+    decisions: ['說明文字改為「開過一次後斷網可用」（首頁徽章、README、練習頁註解）', '預載清單 OFFLINE_FILES 與快取名只維護在 sw.js 一處；教師後台透過 MessageChannel 請 SW 下載並回報檔案數與位元組進度', '下載用 cache: reload 繞過 HTTP 快取；存入前拿掉 Content-Encoding／Content-Length，避免解壓後內容與標頭不符', 'Service Worker 快取名 v4 → v5'],
+    outputs: ['sw.js（OFFLINE_FILES、offline-status／offline-prepare 訊息、離線頁補一句教師後台）、js/offline-prep.js（新）、teacher.html（「📶 離線準備」分頁）', 'Playwright 驗收：預載 33 個檔案 12.4 MB → 關伺服器＋context 斷網 → 開沒開過的 U2、U3 練習頁，Pyodide 就緒並執行 print(sum(range(1,11))) 得 55；對照組未預載時斷網只得到離線頁', 'sw.js：CACHE = coding-dojo-v5'],
+  },
 ];
