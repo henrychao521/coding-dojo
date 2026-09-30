@@ -8,7 +8,7 @@
  */
 // 非 HTML 同源資源走 cache-first，所以題目與評測程式改版後必須換快取名，
 // 否則已開過站的學生會一直吃到舊題目（activate 會自動清掉舊快取）。
-const CACHE = 'coding-dojo-v5';
+const CACHE = 'coding-dojo-v6';
 
 // 「準備離線使用」（教師後台按鈕）預先下載的檔案清單，路徑相對於 SW scope（repo 根）。
 // 新增單元、頁面或 vendor 檔時要一併加進來，並遞增上面的 CACHE。
@@ -16,7 +16,7 @@ const OFFLINE_FILES = [
   './', 'index.html', 'teacher.html', 'dev-log.html',
   'css/style.css', 'css/svg-effects.css', 'css/dojo.css',
   'js/units.js', 'js/main.js', 'js/audio.js', 'js/sw-register.js', 'js/teacher.js',
-  'js/offline-prep.js', 'js/devlog.js', 'js/verify-result.js',
+  'js/offline-prep.js', 'js/devlog.js', 'js/verify-result.js', 'js/sheet-config.js', 'js/sheet-log.js',
   'js/eval/runner-host.js', 'js/eval/practice.js', 'js/eval/coding-runner.worker.js',
   'vendor/codemirror/cm6.bundle.js',
   'vendor/pyodide/pyodide.js', 'vendor/pyodide/pyodide.asm.js', 'vendor/pyodide/pyodide.asm.wasm',

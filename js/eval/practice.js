@@ -16,7 +16,8 @@
   function starsFor(hints) { return hints <= 0 ? 3 : hints === 1 ? 2 : 1; }
 
   // 每題的暫存狀態（本次 session）；code = 切換題目前編輯器裡的內容，切回來時還原
-  const state = problems.map(() => ({ hints: 0, attempts: 0, code: null }));
+  // t0 = 本次開頁第一次看到這一題的時間（作答紀錄的秒數）
+  const state = problems.map(() => ({ hints: 0, attempts: 0, code: null, t0: 0 }));
   let cur = 0;
   let editor = null;
   const editorCompartments = {};
@@ -89,6 +90,7 @@
 
   function renderProblem() {
     const prob = problems[cur];
+    if (!state[cur].t0) state[cur].t0 = Date.now();
     tagEl.className = 'pp-tag' + (prob.isChallenge ? ' challenge' : '');
     tagEl.textContent = prob.isChallenge ? '挑戰題' : ('練習 ' + (cur + 1) + ' / ' + P.exercises.length);
     titleEl.textContent = prob.title;
@@ -182,6 +184,7 @@
     runBtn.disabled = false;
     runBtn.textContent = '▶ 執行並評測';
     renderResults(res, prob);
+    logSubmission(prob, res, state[cur]);
 
     if (res.ok) {
       const stars = starsFor(state[cur].hints);
@@ -227,6 +230,35 @@
       });
     }
     resultsEl.innerHTML = h;
+  }
+
+  // ── 作答紀錄 → 老師的 Google 試算表（js/sheet-log.js；sheet-config.js 的 endpoint 空就完全不送）──
+  // 每次「執行並評測」送一筆 kind=exercise，只含一題：
+  //   q = 單元代號.題目 id（例 U1.e3、U2.challenge），t = code，ok = 全部測資通過，
+  //   a = 通過測資數/總數（逾時記 timeout），k = 總數/總數（a 等於 k 才是 ok），
+  //   tries = 本次開頁這一題第幾次提交，meta = 通過數、總數、這一題看了幾秒。
+  // 不送學生程式碼、輸出內容或錯誤訊息。
+  function sheetCore(prob) {
+    // 指紋內容和 tools/sheets/build_items.py 相同：題名＋說明＋評測方式、每組測資的 JSON
+    return {
+      type: 'code',
+      stem: prob.title + '\n' + prob.desc + '\n' + prob.mode + (prob.funcName ? ':' + prob.funcName : ''),
+      items: (prob.cases || []).map(c => JSON.stringify(c)),
+    };
+  }
+  function logSubmission(prob, res, st) {
+    if (!window.SheetLog || !SheetLog.enabled()) return;
+    const total = (prob.cases || []).length;
+    const pass = res.timeout ? 0 : (res.cases || []).filter(c => c.pass).length;
+    const ok = !!res.ok && !res.timeout;
+    const a = res.timeout ? 'timeout' : pass + '/' + total;
+    const sec = Math.round((Date.now() - (st.t0 || Date.now())) / 1000);
+    const tries = st.attempts;
+    SheetLog.hash(sheetCore(prob)).then(h => SheetLog.send({
+      page: 'units/' + unit.slug + '/practice', kind: 'exercise',
+      items: [{ q: UNIT_ID + '.' + prob.id, h, t: 'code', ok: ok ? 1 : 0, a, k: total + '/' + total, tries }],
+      meta: { score: pass, max: total, sec },
+    }));
   }
 
   // ── 過關星等彈窗 ──

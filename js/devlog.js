@@ -64,4 +64,11 @@ window.DEVLOG = [
     decisions: ['說明文字改為「開過一次後斷網可用」（首頁徽章、README、練習頁註解）', '預載清單 OFFLINE_FILES 與快取名只維護在 sw.js 一處；教師後台透過 MessageChannel 請 SW 下載並回報檔案數與位元組進度', '下載用 cache: reload 繞過 HTTP 快取；存入前拿掉 Content-Encoding／Content-Length，避免解壓後內容與標頭不符', 'Service Worker 快取名 v4 → v5'],
     outputs: ['sw.js（OFFLINE_FILES、offline-status／offline-prepare 訊息、離線頁補一句教師後台）、js/offline-prep.js（新）、teacher.html（「📶 離線準備」分頁）', 'Playwright 驗收：預載 33 個檔案 12.4 MB → 關伺服器＋context 斷網 → 開沒開過的 U2、U3 練習頁，Pyodide 就緒並執行 print(sum(range(1,11))) 得 55；對照組未預載時斷網只得到離線頁', 'sw.js：CACHE = coding-dojo-v5'],
   },
+  {
+    tag: '段落 9', date: '2026-09-30', title: '作答紀錄送到老師的 Google 試算表（每次提交一筆，預設不送）',
+    verbatim: '每次「提交」評測送一筆 kind=exercise：q＝單元／題目 id，t=code，ok＝全部測資通過，a＝pass／fail（或通過測資數/總數），tries＝本題第幾次提交，meta 帶秒數；不要送學生程式碼內容。Service Worker 預載清單有 sheet-log.js 要加入並遞增快取版本。assets/sheet-items.json 收題目（stem＝題目名稱與說明前 80 字）。',
+    context: '四個教學平台共用 classroom-sheets/SPEC.md 的送出協定與 sheet-log.js。練功房沒有選項，一次「執行並評測」就是一次作答：a 記通過測資數/總數（逾時記 timeout），k 記總數/總數，兩者相等才是 ok，試算表端「有 k 時檢查 a、k 與 ok 一致」可以直接套用，選項分布也能看出多數人卡在第幾組測資。tries 沿用練習頁原本的提交次數（本次開頁），秒數從這一題第一次出現在畫面算起。指紋含題名、說明、評測方式與每組測資，改題或改測資就分成新版。',
+    decisions: ['q＝單元代號.題目 id（U1.e3、U2.challenge），page＝units/<slug>/practice', 'a＝通過數/總數或 timeout、k＝總數/總數、meta＝通過數、總數、秒數', '不送程式碼、輸出、錯誤訊息；不需要身分也能用，班級座號只在學生自己填時帶入（sessionStorage）', '班級座號浮動元件讓開右下角 🔊（dojo.css 設 --sl-right／--sl-bottom）', 'Service Worker 快取名 v5 → v6，預載清單加 sheet-config.js、sheet-log.js'],
+    outputs: ['js/sheet-log.js、js/sheet-config.js（endpoint 預設空＝不送、不顯示）；三個 practice.html 載入', 'js/eval/practice.js：logSubmission（每次評測後送一筆）', 'assets/sheet-items.json 24 題，由 tools/sheets/build_items.py 以 node 載入 units.js 與各單元 problems.js 產生', '驗證（只用本機假 endpoint）：tools/sheets/test_sheet_log.py 30 項全過——U1 e1 先錯（0/1、tries 1）再對（tries 2）、e2 一次過、U2 函式題 3/4 再 4/4、U3 無窮迴圈記 timeout；程式碼標記字串沒有出現在任何送出內容；班級座號填了才帶、清除後不帶；離線佇列恢復連線補送；endpoint 空時不顯示不送；「準備離線使用」35 個檔 13.0 MB 含 sheet-log.js，斷網後練習頁可開可評測；node --check 全部 js；motion_qc 三個練習頁＋首頁＋教師後台（endpoint 空與有設定兩種）桌機＋手機全部通過', 'sw.js：CACHE = coding-dojo-v6'],
+  },
 ];

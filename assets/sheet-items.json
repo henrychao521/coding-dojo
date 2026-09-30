@@ -1,0 +1,246 @@
+{
+ "platform": "dojo",
+ "version": "2026-09-30",
+ "questions": [
+  {
+   "q": "U1.e1",
+   "h": "31208776",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "第一行程式：用 print() 印出一行字：歡迎來到生科程式練功房。",
+   "options": {},
+   "answer": "1/1",
+   "items": []
+  },
+  {
+   "q": "U1.e2",
+   "h": "215d6f00",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "印出馬達轉速：變數 rpm 已經幫你準備好（代表馬達每分鐘的轉速），系統會用好幾組不同的轉速測你的程式。請把 rpm 的值印出來。⚠️ 不要自己再寫 rpm =",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U1.e3",
+   "h": "6d592e69",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "標示材料：變數 material 是材料名稱。請印出「材料：」再接上材料名稱，例如材料是 木板 就印出 材料：木板。",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U1.e4",
+   "h": "d32a695c",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "齒輪減速比：馬達軸上的小齒輪（主動輪，齒數 small）帶動大齒輪（從動輪，齒數 big），轉速會變慢、力量變大。減速比 = 從動輪齒數 ÷ 主動輪齒數 = b",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U1.e5",
+   "h": "9dec0cae",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "溫度讀值（f-string）：變數 temp 是溫度感測器讀到的攝氏溫度。請用 f-string 印出：目前溫度：25°C（把 25 換成實際讀值）。",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U1.e6",
+   "h": "d9455d36",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "木料總長：變數 a、b 是兩段木料的長度（公分）。請算出總長並印出（只印數字）。",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U1.e7",
+   "h": "22d08bee",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "字串轉數字：變數 s 是「字串」形式的數字（例如 \"24\"，注意有引號）。請把它轉成整數後加上 6，再印出結果。",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U1.challenge",
+   "h": "4cf2f9af",
+   "t": "code",
+   "page": "units/u1-output/practice",
+   "stem": "挑戰：電池功率計算：變數 v（電壓，伏特）、i（電流，安培）。電功率公式 P = 電壓 × 電流。請算出功率並用 f-string 印出：功率：6 W（把 6 ",
+   "options": {},
+   "answer": "4/4",
+   "items": []
+  },
+  {
+   "q": "U2.e1",
+   "h": "c67e47a8",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "過熱警示：完成函式 is_overheat(t)：當溫度 t 大於 60 時回傳 True，否則回傳 False。",
+   "options": {},
+   "answer": "4/4",
+   "items": []
+  },
+  {
+   "q": "U2.e2",
+   "h": "f1c158f2",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "馬達轉速分級：完成 motor_level(rpm)：rpm 小於 100 回傳 \"低\"；100 到 299 回傳 \"中\"；300 以上回傳 \"高\"。",
+   "options": {},
+   "answer": "6/6",
+   "items": []
+  },
+  {
+   "q": "U2.e3",
+   "h": "98c79383",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "安全範圍判斷：完成 in_safe_range(value, low, high)：當感測器讀值 value 落在 low 到 high 之間（含兩端）回傳 T",
+   "options": {},
+   "answer": "5/5",
+   "items": []
+  },
+  {
+   "q": "U2.e4",
+   "h": "df235cc5",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "材料夠不夠裁：完成 enough_material(need, stock)：庫存 stock 大於等於需要量 need 時回傳 True（夠裁），否則 Fal",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U2.e5",
+   "h": "f0426680",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "紅外線測距行動：測距機器人。完成 ir_action(dist)：距離小於 10 回傳 \"停\"；10 到 29 回傳 \"慢\"；30 以上回傳 \"前進\"。",
+   "options": {},
+   "answer": "5/5",
+   "items": []
+  },
+  {
+   "q": "U2.e6",
+   "h": "02584342",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "低電壓警示：完成 low_voltage_warn(v)：電壓 v 小於或等於 3.3 伏特時回傳 True（要警示），否則 False。",
+   "options": {},
+   "answer": "4/4",
+   "items": []
+  },
+  {
+   "q": "U2.e7",
+   "h": "423591e7",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "自動照明：完成 light_action(light)：光感值小於 200（太暗）回傳 \"開燈\"；大於 800（太亮）回傳 \"關燈\"；其餘回傳 \"維持\"。",
+   "options": {},
+   "answer": "6/6",
+   "items": []
+  },
+  {
+   "q": "U2.challenge",
+   "h": "a73abb33",
+   "t": "code",
+   "page": "units/u2-condition/practice",
+   "stem": "挑戰：交通號誌狀態機：交通號誌一個週期 60 秒：第 0–29 秒亮「綠」、第 30–34 秒亮「黃」、第 35–59 秒亮「紅」。完成 traffic_lig",
+   "options": {},
+   "answer": "6/6",
+   "items": []
+  },
+  {
+   "q": "U3.e1",
+   "h": "37946adb",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "累加求總和：完成 sum_readings(n)：把 1 到 n 的整數全部加起來回傳。例如 n=5 → 1+2+3+4+5 = 15。",
+   "options": {},
+   "answer": "4/4",
+   "items": []
+  },
+  {
+   "q": "U3.e2",
+   "h": "248b2ac9",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "需要幾趟：一台輸送車一趟最多載 k 個零件，共有 parts 個。完成 trips_needed(parts, k) 回傳至少要幾趟（最後一趟沒裝滿也算一趟）。",
+   "options": {},
+   "answer": "5/5",
+   "items": []
+  },
+  {
+   "q": "U3.e3",
+   "h": "2f05c1a0",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "找最大讀值：完成 max_reading(readings)：回傳清單 readings 裡的最大值（請自己用迴圈找，不要用內建的 max）。",
+   "options": {},
+   "answer": "4/4",
+   "items": []
+  },
+  {
+   "q": "U3.e4",
+   "h": "e57a701c",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "超標次數：完成 count_over(readings, limit)：回傳清單裡數值「超過」limit 的個數。",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U3.e5",
+   "h": "87f66b24",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "加速到目標：馬達每過 1 秒轉速增加 10 rpm，從 0 開始。完成 accel_time(target) 回傳轉速第一次「達到或超過」target 所需的秒",
+   "options": {},
+   "answer": "5/5",
+   "items": []
+  },
+  {
+   "q": "U3.e6",
+   "h": "989a9eba",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "輸送帶燈號（巢狀）：完成 belt_pattern(n)：回傳階梯燈號字串，第 1 列 1 顆 ●、第 2 列 2 顆…第 n 列 n 顆，列與列之間用換行 \\",
+   "options": {},
+   "answer": "3/3",
+   "items": []
+  },
+  {
+   "q": "U3.e7",
+   "h": "4d1caeff",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "平均讀值：完成 average(readings)：回傳清單所有讀值的平均（總和 ÷ 數量）。",
+   "options": {},
+   "answer": "4/4",
+   "items": []
+  },
+  {
+   "q": "U3.challenge",
+   "h": "a5de6951",
+   "t": "code",
+   "page": "units/u3-loop/practice",
+   "stem": "挑戰：電池放電模擬：電池電量 level，每一步消耗 step 電量。完成 battery_drain(level, step) 回傳電量第一次「歸零或變負」需",
+   "options": {},
+   "answer": "5/5",
+   "items": []
+  }
+ ]
+}

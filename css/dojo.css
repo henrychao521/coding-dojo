@@ -214,3 +214,6 @@ pre.demo-code .num { color: #fdba74; }
   .dojo-hero, #dashboard, .unit-map { padding-left: 18px; padding-right: 18px; }
   .prac-shell { padding-left: 14px; padding-right: 14px; }
 }
+
+/* 作答紀錄的班級座號元件（js/sheet-log.js，只在設定了作答紀錄網址時出現）：讓開右下角的 🔊 音效開關 */
+:root { --sl-right: 84px; --sl-bottom: 28px; }

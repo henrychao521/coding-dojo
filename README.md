@@ -14,6 +14,13 @@ Python 軌 U1 輸出與變數 / U2 條件判斷 / U3 迴圈，每單元 7 練習
 
 第二波規劃：U4 函式 / U5 清單與字串 / U6 綜合小專題、Blockly 積木軌、JavaScript 軌、微控制器 Wokwi 橋接。
 
+## 作答紀錄送到老師的 Google 試算表（選用）
+規格見 `classroom-sheets/SPEC.md`（四個教學平台共用）。預設**完全不送**：`js/sheet-config.js` 的 `endpoint` 是空字串時，頁面不顯示任何告知或班級座號元件。
+- 老師部署共用的 Apps Script（`Code.gs`，`CONFIG.PLATFORM = 'dojo'`、`CONFIG.ITEMS_URL` 指到本站 `assets/sheet-items.json`）後，把網頁應用程式網址貼到 `endpoint`，並遞增 `sw.js` 的 `CACHE`
+- 每次「執行並評測」送一筆 `kind=exercise`：`q` = `U1.e3` 這種單元.題目代號、`t=code`、`a` = 通過測資數/總數（逾時 `timeout`）、`k` = 總數/總數、`ok` = 全部通過、`tries` = 本題第幾次提交、`meta` = 通過數、總數、秒數。**不送學生程式碼、輸出或錯誤訊息**
+- 班級座號只在學生自己於右下角填寫時帶入（存 sessionStorage，關分頁就清掉）
+- 改了題目或測資後重跑 `python3 tools/sheets/build_items.py`；測試 `python3 tools/sheets/test_sheet_log.py`（只用本機假 endpoint）
+
 ## 本機測試
 ```bash
 python3 tools/serve.py 8733     # 然後開 http://localhost:8733
